@@ -1,0 +1,21 @@
+#+title:Kolmogorov Search
+This program provides methods for finding the smallest possible programs in
+various languages that satisfy various properties. Currently implausibly slow
+and unfinished.
+* Planned Features
+** Optimization and Decoupling
+The most general method, of simply iterating over all possible bytes, will work
+for any language given a "running function" and a "match predicate". However of
+course this will be implausibly inefficient. So instead, it will be necessary to
+have various "backend" generators specific to various languages, that can speed
+up the process by only generating code known to be valid or more likely to be
+valid.
+** First Valid Program
+The basic (and current working) example just finds the first program that ~g++~
+compiles. This can be seen as iterating over a statespace (naively simply all
+possible integers/bytestrings), mapping a transition function (a compiler) to
+each element of that space, and checking if the result satisfies a predicate.
+This could be abstracted to apply to any kind of Kolmogorov search, i.e. the
+smallest C++ program that outputs "Hello, World" has the same statespace, a
+transition function that compiles, runs, and results in the output on ~stdout~,
+and a predicate that simply checks if the input is equal to "Hello, World".
